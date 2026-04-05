@@ -28,4 +28,16 @@ int main() {
 
     // 8 bytes
     double regularDouble = 54356346.234234;
+
+
+    printf("Size of char on this system is: %zu. Char value: %c\n", sizeof(regularChar), regularChar);
+    printf("Size of unsigned char on this system is: %zu. Unsigned char value: %d\n", sizeof(unsignedChar), unsignedChar);
+    printf("Size of short int on this system is: %zu. Short int value: %hd\n", sizeof(shortInt), shortInt);
+    printf("Size of integer on this system is: %zu. Integer value: %d\n", sizeof(regularInt), regularInt);
+    printf("Size of unsigned int on this system is: %zu. Unsigned int value: %u\n", sizeof(unsignedInt), unsignedInt);
+    printf("Size of long long int on this system is: %zu. Long long int value: %lld\n", sizeof(longLongInt), longLongInt);
+    printf("Size of unsigned long long int on this system is: %zu. Unsigned long long int value: %llu\n", sizeof(unsignedLongLongInt), unsignedLongLongInt);
+    printf("Size of float on this system is: %zu. Float value: %f\n", sizeof(regularFloat), regularFloat);
+    printf("Size of double on this system is: %zu. Char value: %lf\n", sizeof(regularDouble), regularDouble);
+
 }
