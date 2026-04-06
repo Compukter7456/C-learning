@@ -1,0 +1,18 @@
+Day-1:
+- Learned printf(), sizeof()
+- Learned variable types, size, declaration
+
+Day-2:
+- Learned scanf(), fgets(), getchar(), puchar()
+- Learned how stdin/stdout buffering works (covered '\0', '\n', EOF in stdout)
+- Wrote stdin cleaner with EOF handler for scanf() and fgets()
+- Learned "for", "while" cycles
+- Learned if operator
+- Learned string principe
+- Worked with list (chars array)
+
+Day-3:
+- Wrote isDigit(), isAlpha(), printASCIITable() functions. Functional based on ASCI
+- Wrote function which reads user input, saves input number to long long int and checks whether number can be divided by 3 OR 5 (not both). Function works with negative numbers.
+- Learned ternary operator
+- Wrote function which checks whether input number is a prime number
