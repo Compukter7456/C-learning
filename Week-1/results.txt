@@ -1,0 +1,12 @@
+Day-1:
+- Learned printf(), sizeof()
+- Learned variable types, size, declaration
+
+Day-2:
+- Learned scanf(), fgets()
+- Learned stdin principe
+- Wrote stdin cleaner for scanf() and fgets()
+- Learned"for" cycle
+- Learned string principe (string is an array of chars, end is marked with '\0'. Char names[] is a pointer to the first char of chars list) 
+- Worked with list (chars array)
+
