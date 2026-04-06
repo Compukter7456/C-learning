@@ -60,6 +60,8 @@ void printASCIITable(void) {
     }
 }
 
+// If number can be divided on [2; i], where i is square root, it is not prime
+// [-inf; 1] is not prime numbers
 int isPrime(int number) {
 
     if (number <= 1) {
@@ -75,6 +77,39 @@ int isPrime(int number) {
     return 1;
 }
 
+void logicalOperators(void) {
+    int a = 5, b = 10, c = 0;
+
+    // && - logical AND
+    if (a > 0 && b > 0) {
+        printf("1) Both a and b are positive (a > 0 && b > 0) \n");
+    }
+
+    // || - logical OR
+    if (a < 0 || b > 0) {
+        printf("2) At least one condition is true (a < 0 || b > 0)\n");
+    }
+
+    // ! - logical NOT
+    if (!c) {
+        printf("3) c is zero, so !c is true (!c)\n");
+    }
+
+    // Combining operators
+    if ((a > 0 && b > 0) || c != 0) {
+        printf("4) Combination returned true: (a > 0 && b > 0) || c != 0\n");
+    }
+
+    //  Short-circuiting example
+    // (number != 0 && 4 / number == 4). If first condition is false, compiler sees that the following calculations is pointless, so it skips them
+    printf("5) Short-circuiting demonstration:\n");
+    if (c != 0 && (b / c) > 1) {
+        printf("This won't be printed due to short-circuiting\n");
+    } else {
+        printf("Short-circuit prevented division by zero\n");
+    }
+}
+
 int main(void) {
 //    taskOne();
 //    (isAlpha('D')) ? printf("D is alpha\n") : (void)0;
@@ -83,4 +118,6 @@ int main(void) {
     for (int i = -10; i <= 100; ++i) {
         printf("%d is %s", i, (isPrime(i)) ? "prime\n" : "not prime\n");
     }
+
+    logicalOperators();
 }
