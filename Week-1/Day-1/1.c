@@ -24,7 +24,7 @@ int main() {
     unsigned long long int unsignedLongLongInt = 3464536546457647ULL;
 
     // 4 bytes
-    float regularFloat = 234.24f;
+    float regularFloat = 234.243465f;
 
     // 8 bytes
     double regularDouble = 54356346.234234;
@@ -40,4 +40,8 @@ int main() {
     printf("Size of float on this system is: %zu. Float value: %f\n", sizeof(regularFloat), regularFloat);
     printf("Size of double on this system is: %zu. Char value: %lf\n", sizeof(regularDouble), regularDouble);
 
+    printf("-----------------------------------------------------------------------\n");
+
+    printf("Float with 4 symbols after comma: %.4f\n", regularFloat);
+    printf("Double with 5 symbols after comma: %.5lf\n", regularDouble);
 }
