@@ -112,16 +112,21 @@ void logicalOperators(void) {
 
 // Ask user to enter numbers while input number != 0, than output sum of entered numbers
 void secondTask(void) {
-    double number = 0, sum = 0;
     char userArray[64];
+    double number = 0, sum = 0;
 
     while (1) {
         printf("Hello, enter any number (0 to exit): ");
 
+        // If fgets returns error or EOF - exit
         if (!fgets(userArray, sizeof(userArray), stdin)) {
             break;
         }
 
+        // sscanf reads data from a string according to the specified format
+        // If the input matches the format, the value is stored in the given variable
+        // Parsing stops when the input no longer matches the format
+        // If user enters wrong data type - sscanf returns 0
         if (sscanf(userArray, "%lf", &number) != 1) {
             printf("Invalid input\n");
             continue;

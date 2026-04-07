@@ -13,8 +13,8 @@ Day-2:
 
 Day-3:
 - Wrote isDigit(), isAlpha(), printASCIITable() functions. Functional based on ASCI
-- Wrote function which reads user input, saves input number to long long int and checks whether number can be divided by 3 OR 5 (not both). Function works with negative numbers.
+- Wrote a function which reads user input, saves input number to long long int and checks whether number can be divided by 3 OR 5 (not both). Function works with negative numbers.
 - Learned ternary operator
 - Wrote function which checks whether input number is a prime number
 - Learned sscanf() function
-- A function that reads user input, checks if the entered data is a double, stores it in an array, parses it using sscanf, and adds the number to the total sum
+- Wrote a function that reads user input, checks if the entered data is a double, stores it in an array, parses it using sscanf, and adds the number to the total sum
