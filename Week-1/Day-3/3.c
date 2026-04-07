@@ -12,7 +12,7 @@ void cleanStdin(void) {
 }
 
 // Read an integer. Write all numbers from 0 to n, which can be divided by 3 or by 5, but not both
-void taskOne(void) {
+void firstTask(void) {
     long long number = 0;
 
     printf("Enter any whole number: ");
@@ -110,14 +110,37 @@ void logicalOperators(void) {
     }
 }
 
-int main(void) {
-//    taskOne();
-//    (isAlpha('D')) ? printf("D is alpha\n") : (void)0;
-//    printASCIITable();
+// Ask user to enter numbers while input number != 0, than output sum of entered numbers
+void secondTask(void) {
+    double number = 0, sum = 0;
+    char userArray[64];
 
-    for (int i = -10; i <= 100; ++i) {
-        printf("%d is %s", i, (isPrime(i)) ? "prime\n" : "not prime\n");
+    while (1) {
+        printf("Hello, enter any number (0 to exit): ");
+
+        if (!fgets(userArray, sizeof(userArray), stdin)) {
+            break;
+        }
+
+        if (sscanf(userArray, "%lf", &number) != 1) {
+            printf("Invalid input\n");
+            continue;
+        }
+
+        if (number == 0) {
+            break;
+        }
+
+        sum += number;
     }
 
-    logicalOperators();
+    printf("Sum of your numbers is: %lf\n", sum);
+}
+
+int main(void) {
+//    for (int i = -10; i <= 100; ++i) {
+//        printf("%d is %s", i, (isPrime(i)) ? "prime\n" : "not prime\n");
+//    }
+    secondTask();
+
 }
