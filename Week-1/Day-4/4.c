@@ -65,11 +65,28 @@ void thirdTask(void) {
     printf("Congrats! You've guessed number in %d tries\n", totalTries);
 }
 
+// Generate 20 random numbers in the range [-50, 50], print them, and calculate the sum of numbers that are positive and divisible by 3
+void fourthTask(void) {
+    int sum = 0, randomNumber = 0;
+
+    for (int i = 0; i < 20; ++i) {
+        srand(time(NULL));
+        randomNumber = rand() % (50 + 50 + 1) - 50;
+
+        if (randomNumber > 0 && randomNumber % 3 == 0) {
+            sum += randomNumber;
+            printf("%d is positive and divisible by 3\n", randomNumber);
+        }
+    }
+
+    printf("Sum of generated and filtered numbers is: %d\n", sum);
+}
+
 int main() {
 
 //    firstTask();
 //    secondTask();
-    thirdTask();
-
+//    thirdTask();
+    fourthTask();
     return 0;
 }
