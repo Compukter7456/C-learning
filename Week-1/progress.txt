@@ -18,3 +18,7 @@ Day-3:
 - Wrote function which checks whether input number is a prime number
 - Learned sscanf() function
 - Wrote a function that reads user input, checks if the entered data is a double, stores it in an array, parses it using sscanf, and adds the number to the total sum
+
+Day-4:
+- Learned srand(), rand(), time()
+- Wrote functio, which generates 100 random integers in range [10; 110] and calculates sum of even numbers
