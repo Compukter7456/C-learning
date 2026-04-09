@@ -5,6 +5,10 @@
 #define UPPER_BOUND 110
 #define LOWER_BOUND 10
 
+// Generate random number in range [x; y]:
+// randomNumber = rand() % (y - x + 1) + x
+// Random number in range [-10; 10]: randomNumber = rand() % (10 + 10 + 1) - 10
+
 // Generate 100 random numbers in range [10; 110] and calculate sum of even ones
 void firstTask(void) {
     short int sum = 0, randomNumber = 0;
@@ -69,8 +73,9 @@ void thirdTask(void) {
 void fourthTask(void) {
     int sum = 0, randomNumber = 0;
 
+    srand(time(NULL));
+
     for (int i = 0; i < 20; ++i) {
-        srand(time(NULL));
         randomNumber = rand() % (50 + 50 + 1) - 50;
 
         if (randomNumber > 0 && randomNumber % 3 == 0) {
