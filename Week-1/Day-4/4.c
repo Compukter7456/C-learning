@@ -30,8 +30,6 @@ void firstTask(void) {
 void secondTask(void) {
     int generatedNumbers = 0, randomNumber = 0;
 
-    srand(time(NULL));
-
     while (randomNumber != 25) {
         randomNumber = rand() % (50 - 1 + 1) + 1;
         printf("Random number in range [1; 50] is: %d\n", randomNumber);
@@ -47,8 +45,7 @@ void thirdTask(void) {
     int numberToGuess = 0, userGuess = 0, totalTries = 0;
     char buffer[64];
 
-    srand(time(NULL));
-    numberToGuess = rand() % 10;
+    numberToGuess = rand() % 11;
 
     do {
         printf("Hello, guess a number within 0 and 10: ");
@@ -73,8 +70,6 @@ void thirdTask(void) {
 void fourthTask(void) {
     int sum = 0, randomNumber = 0;
 
-    srand(time(NULL));
-
     for (int i = 0; i < 20; ++i) {
         randomNumber = rand() % (50 + 50 + 1) - 50;
 
@@ -88,14 +83,13 @@ void fourthTask(void) {
 }
 
 // Fill an array with 15 random numbers in range [0; 100], find and output smallest and biggest numbers, calculate sum of all numbers in array
-void fivethTask(void) {
+void fifthTask(void) {
     int array[15];
     short int iterationNumber = 0, theSmallestNumber = 100, theBiggestNumber = 0, sum = 0;
 
-    srand(time(NULL));
     // Fill array with random numbers
     while (iterationNumber != 15) {
-        array[iterationNumber] = rand() % 100;
+        array[iterationNumber] = rand() % 101;
         printf("%d'th array element is: %d\n", iterationNumber, array[iterationNumber]);
         iterationNumber++;
     }
@@ -106,7 +100,8 @@ void fivethTask(void) {
         if (array[iterationNumber] < theSmallestNumber) {
             theSmallestNumber = array[iterationNumber];
         }
-        else if (array[iterationNumber] > theBiggestNumber) {
+
+        if (array[iterationNumber] > theBiggestNumber) {
             theBiggestNumber = array[iterationNumber];
         }
 
@@ -121,10 +116,12 @@ void fivethTask(void) {
 
 int main() {
 
+    srand(time(NULL));
+
 //    firstTask();
 //    secondTask();
 //    thirdTask();
 //    fourthTask();
-    fivethTask();
+    fifthTask();
     return 0;
 }
