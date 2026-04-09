@@ -5,7 +5,7 @@
 #define UPPER_BOUND 110
 #define LOWER_BOUND 10
 
-// Generate 100 random numbers within [10; 110] and calculate sum of even ones
+// Generate 100 random numbers in range [10; 110] and calculate sum of even ones
 void firstTask(void) {
     short int sum = 0, randomNumber = 0;
     // Set rand PRNG seed to current time
@@ -22,7 +22,7 @@ void firstTask(void) {
     printf("Sum of all even numbers is: %d\n", sum);
 }
 
-// Generate random numbers withit [1; 50] untill 25 is generated, print ammount all generated numbers
+// Generate random numbers in range [1; 50] untill 25 is generated, than prints ammount all generated numbers
 void secondTask(void) {
     int generatedNumbers = 0, randomNumber = 0;
 
@@ -38,11 +38,38 @@ void secondTask(void) {
 
 }
 
+// Generate random number in range [0; 10], ask user for number to ques. If user quessed - exit and print total tries, if not - give a hint
+void thirdTask(void) {
+    int numberToGuess = 0, userGuess = 0, totalTries = 0;
+    char buffer[64];
+
+    srand(time(NULL));
+    numberToGuess = rand() % 10;
+
+    do {
+        printf("Hello, guess a number within 0 and 10: ");
+        fgets(buffer, sizeof(userGuess), stdin);
+
+        if ((sscanf(buffer, "%d", &userGuess) != 1)) {
+            printf("Invalid input\n");
+            continue;
+        }
+
+        if (userGuess != numberToGuess) {
+            printf("Unluck. Number is %s", (userGuess > numberToGuess) ? "smaller\n" : "bigger\n");
+        }
+        totalTries++;
+
+    } while (userGuess != numberToGuess);
+
+    printf("Congrats! You've guessed number in %d tries\n", totalTries);
+}
+
 int main() {
 
 //    firstTask();
 //    secondTask();
-
+    thirdTask();
 
     return 0;
 }
