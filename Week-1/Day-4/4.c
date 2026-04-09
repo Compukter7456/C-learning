@@ -69,7 +69,7 @@ void thirdTask(void) {
     printf("Congrats! You've guessed number in %d tries\n", totalTries);
 }
 
-// Generate 20 random numbers in the range [-50, 50], print them, and calculate the sum of numbers that are positive and divisible by 3
+// Generate 20 random numbers in range [-50, 50], print them, and calculate the sum of numbers that are positive and divisible by 3
 void fourthTask(void) {
     int sum = 0, randomNumber = 0;
 
@@ -87,11 +87,44 @@ void fourthTask(void) {
     printf("Sum of generated and filtered numbers is: %d\n", sum);
 }
 
+// Fill an array with 15 random numbers in range [0; 100], find and output smallest and biggest numbers, calculate sum of all numbers in array
+void fivethTask(void) {
+    int array[15];
+    short int iterationNumber = 0, theSmallestNumber = 100, theBiggestNumber = 0, sum = 0;
+
+    srand(time(NULL));
+    // Fill array with random numbers
+    while (iterationNumber != 15) {
+        array[iterationNumber] = rand() % 100;
+        printf("%d'th array element is: %d\n", iterationNumber, array[iterationNumber]);
+        iterationNumber++;
+    }
+
+    iterationNumber = 0;
+    // Find the smallest and the biggest number and calculate sum of all numbers in array
+    while (iterationNumber != 15) {
+        if (array[iterationNumber] < theSmallestNumber) {
+            theSmallestNumber = array[iterationNumber];
+        }
+        else if (array[iterationNumber] > theBiggestNumber) {
+            theBiggestNumber = array[iterationNumber];
+        }
+
+        sum += array[iterationNumber];
+        iterationNumber++;
+    }
+
+    printf("The smallest number in array is: %d\n", theSmallestNumber);
+    printf("The biggest number in arrany is: %d\n", theBiggestNumber);
+    printf("Sum of all numbers is: %d\n", sum);
+}
+
 int main() {
 
 //    firstTask();
 //    secondTask();
 //    thirdTask();
-    fourthTask();
+//    fourthTask();
+    fivethTask();
     return 0;
 }
