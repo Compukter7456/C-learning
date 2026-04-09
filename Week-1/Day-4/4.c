@@ -9,11 +9,12 @@
 // randomNumber = rand() % (y - x + 1) + x
 // Random number in range [-10; 10]: randomNumber = rand() % (10 + 10 + 1) - 10
 
+// time(NULL) returns seconds from the first January 1970
+// time(&currentTime) returns seconds from the first January 1970 and saves time to time_t currentTime variable
+
 // Generate 100 random numbers in range [10; 110] and calculate sum of even ones
 void firstTask(void) {
     short int sum = 0, randomNumber = 0;
-    // Set rand PRNG seed to current time
-    srand(time(NULL));
 
     for (int i = 0; i < 100; ++i) {
         randomNumber = rand() % (UPPER_BOUND - LOWER_BOUND + 1) + LOWER_BOUND;
@@ -115,13 +116,14 @@ void fifthTask(void) {
 }
 
 int main() {
-
+    // Set PRNG seed to current time
     srand(time(NULL));
 
-//    firstTask();
-//    secondTask();
-//    thirdTask();
-//    fourthTask();
+//  firstTask();
+//  secondTask();
+//  thirdTask();
+//  fourthTask();
     fifthTask();
+
     return 0;
 }
