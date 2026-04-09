@@ -20,5 +20,8 @@ Day-3:
 - Wrote a function that reads user input, checks if the entered data is a double, stores it in an array, parses it using sscanf, and adds the number to the total sum
 
 Day-4:
+- Learned #define
+- Learned escape sequences
 - Learned srand(), rand(), time()
-- Wrote functio, which generates 100 random integers in range [10; 110] and calculates sum of even numbers
+- Wrote function, which generates 100 random integers in range [10; 110] and calculates sum of even numbers
+- Wrote function, which generates numbers in range [1; 50] untill 25 is generated and outputs ammount of generated numbers
