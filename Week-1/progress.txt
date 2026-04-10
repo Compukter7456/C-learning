@@ -28,3 +28,8 @@ Day-4:
 - Wrote a number guessing game which generates a random number and asks user to guess it with hints
 - Wrote a function which generates 20 random numbers in range [-50, 50] and outputs & calculates sum of positive numbers divisible by 3
 - Wrote a function which fills an array with random numbers, finds the minimum and maximum values, and calculates the total sum
+
+Day-5:
+- Learned switch/case
+- Learned functions types, variable scopes
+- Wrote simple cli calculator
