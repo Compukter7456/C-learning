@@ -79,7 +79,6 @@ void secondFunction(void) {
 }
 
 int main(void) {
-    //calculator();
     firstFunction();
     secondFunction();
     return 0;
