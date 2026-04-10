@@ -38,7 +38,7 @@ int calculateSqrt(int number) {
         return -1;
     }
 
-    while ((i + 1) * (i + 1) <= number) {
+    while ((i + 1) <= number / (i + 1)) {
         i++;
     }
     return i;
