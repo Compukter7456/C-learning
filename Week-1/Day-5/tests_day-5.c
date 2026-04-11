@@ -22,7 +22,7 @@ int main(void) {
     long long int number;
 
     printf("Hello, enter any number: ");
-    if (readInt(&number)) {
+    if (readLongLongInt(&number)) {
         printf("You've entered %lld\n", number);
     }
     else {
