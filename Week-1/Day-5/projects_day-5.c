@@ -3,8 +3,8 @@
 #include <time.h>
 
 struct MyStruct {
-    size_t spacesAmmount;
-    size_t symbolsAmmount;
+    int spacesAmmount;
+    int symbolsAmmount;
     int errorCode;
 };
 
