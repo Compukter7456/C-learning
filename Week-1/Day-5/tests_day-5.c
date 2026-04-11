@@ -1,16 +1,19 @@
 #include <stdio.h>
 
-int readInt(long long *out) {
+int readLongLongInt(long long *out) {
     char buffer[128];
-    char extra[8];
+    char extra;
+    long long temp;
 
     if (!fgets(buffer, sizeof(buffer), stdin)) {
         return 0; // Fgets failed
     }
 
-    if (sscanf(buffer, "%lld %c", out, extra) != 1) {
-        return 0; // User entered more than just a number
+    if (sscanf(buffer, " %lld %c", &temp, &extra) != 1) {
+        return 0; // User entered invalid data
     }
+    *out = temp;
+
     return 1;
 }
 
