@@ -39,3 +39,9 @@ Day-5:
 - Wrote a function that fills an array with random numbers within a specified range
 - Wrote a function that analyzes an array of numbers and stores the results in a struct
 - Wrote a function that takes an array of numbers and generates a histogram based on it
+
+Day-6:
+- Changed writing style from camelCase to snake_case
+- Reviewed previously learned material
+- Wrote a function that analyzes a character buffer, using pointer arithmetic, and counts letters, digits, spaces, and other characters, storing result in a struct
+- Wrote a function that prints the analyzed statistics from the struct
