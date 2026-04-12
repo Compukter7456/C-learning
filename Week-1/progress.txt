@@ -43,5 +43,6 @@ Day-5:
 Day-6:
 - Changed writing style from camelCase to snake_case
 - Reviewed previously learned material
+- Partially learned pointers
 - Wrote a function that analyzes a character buffer, using pointer arithmetic, and counts letters, digits, spaces, and other characters, storing result in a struct
 - Wrote a function that prints the analyzed statistics from the struct
