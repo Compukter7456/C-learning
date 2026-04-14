@@ -46,3 +46,6 @@ Day-6:
 - Partially learned pointers
 - Wrote a function that analyzes a character buffer, using pointer arithmetic, and counts letters, digits, spaces, and other characters, storing result in a struct
 - Wrote a function that prints the analyzed statistics from the struct
+- Wrote a function that takes pointers to two integers and swaps them
+- Wrote a function that takes a pointer to an element in an array and the array size, and checks whether the element is an integer
+- Wrote a function that takes a pointer to an element in an array and the array size, and checks whether the element is a string

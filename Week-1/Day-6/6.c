@@ -1,7 +1,7 @@
 #include <stdio.h>
 
 struct array_stats {
-    long long int_sum;
+    int digits_sum;
 
     int letters;
     int digits;
@@ -27,7 +27,7 @@ int is_digit(const char data) {
     return 0;
 }
 
-int is_integer(const char *data, size_t data_size) {
+int is_integer(const char* data, size_t data_size) {
     const char* end = data + data_size;
 
     if (data == end) {
@@ -63,6 +63,10 @@ int is_string(const char *data, size_t data_size) {
         return 0;
     }
 
+    if (!is_alpha(*data)) {
+        return 0;
+    }
+
     while (data < end && *data != ' ' && *data != '\n' && *data != '\0') {
         if (!is_alpha(*data)) {
             return 0;
@@ -86,7 +90,7 @@ void print_array_stats(struct array_stats array_stats) {
     printf("Spaces: %d\n", array_stats.spaces);
     printf("Strings: %d\n", array_stats.strings);
     printf("Integers: %d\n", array_stats.ints);
-    printf("Sum of all integers: %lld\n", array_stats.int_sum);
+    printf("Sum of all digits: %d\n", array_stats.digits_sum);
     printf("Other data: %d\n", array_stats.others);
 }
 
@@ -94,18 +98,19 @@ void print_array_stats(struct array_stats array_stats) {
 struct array_stats analyze_array(const char *array, size_t array_size) {
     struct array_stats array_stats = {0, 0, 0, 0, 0, 0, 0};
 
-    const char *array_pointer = array;
+    const char* end = array + array_size;
 
-    while (array_pointer < array + array_size) {
-        if (is_alpha(*array_pointer)) {
+    while (array < end) {
+        if (is_alpha(*array)) {
             array_stats.letters++;
         }
 
-        else if (is_digit(*array_pointer)) {
+        else if (is_digit(*array)) {
             array_stats.digits++;
+            array_stats.digits_sum += (*array - '0');
         }
 
-        else if (*array_pointer == ' ') {
+        else if (*array == ' ') {
             array_stats.spaces++;
         }
 
@@ -113,12 +118,7 @@ struct array_stats analyze_array(const char *array, size_t array_size) {
             array_stats.others++;
         }
 
-        if (is_integer(array_pointer, array_size)) {
-            for (const char* pointer = array_pointer; pointer < array + array_size && *pointer != ' ' && *pointer != '\n' && *pointer != '\0'; pointer++) {
-                array_stats.int_sum = array_stats.int_sum * 10 + (*pointer - '0');
-            }
-            array_stats.ints++;
-        }
+        array++;
     }
 
     return array_stats;
@@ -137,7 +137,7 @@ int main(void) {
         return 1;
     }
 
-    while (buffer[buffer_size] != '\0') {
+    while (buffer[buffer_size] != '\0' && buffer_size < sizeof(buffer)) {
         buffer_size++;
     }
     
