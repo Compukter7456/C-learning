@@ -87,6 +87,7 @@ struct array_stats analyze_array(const char *array, size_t array_size) {
         }
 
         if (is_integer(array_pointer, array_size)) {
+            printf("Integer found: %s\n", array_pointer);
             for (const char *pointer = array_pointer; pointer < array + array_size && (*pointer != ' ' || *pointer != '\n' || *pointer != '\0'); ++pointer) {
                 temp_int = temp_int * 10 + *pointer;
             }
@@ -96,6 +97,7 @@ struct array_stats analyze_array(const char *array, size_t array_size) {
         }
 
         else if (is_string(array_pointer, array_size)) {
+            printf
             array_stats.strings++;
         }
 
