@@ -28,14 +28,20 @@ int is_digit(const char data) {
 }
 
 int is_integer(const char *data, size_t data_size) {
-    for (size_t i = 0; i < data_size && (data[i] != ' ' && data[i] != '\n' && data[i] != '\0'); ++i) {
-        if (data[i] == '-' || data[i] == '+') {
-            ++i;
+    if (*data == ' ' || *data == '\n' || *data == '\0') {
+        return 0;
+    }
+
+    for (size_t i = 0; i < data_size && (*data != ' ' && *data != '\n' && *data != '\0'); ++i) {
+        if (*data == '-' || *data == '+') {
+            data++;
+            continue;
         }
 
-        if (!is_digit(data[i]) || (data[i] != ' ' && data[i] != '\n' && data[i] != '\0')) {
+        if (!is_digit(*data)) {
             return 0;
         }
+        data++;
     }
     return 1;
 }
