@@ -28,29 +28,48 @@ int is_digit(const char data) {
 }
 
 int is_integer(const char *data, size_t data_size) {
-    if (*data == ' ' || *data == '\n' || *data == '\0') {
+    const char* end = data + data_size;
+
+    if (data == end) {
         return 0;
     }
 
     if (*data == '-' || *data == '+') {
-            data++;
+        data++;
+
+        if (data == end) {
+            return 0;
+        }
     }
 
-    while (data < (data + data_size) && (*data != ' ' && *data != '\n' && *data != '\0')) {
+    if (!is_digit(*data)) {
+        return 0;
+    }
+
+    while (data < end && *data != ' ' && *data != '\n' && *data != '\0') {
         if (!is_digit(*data)) {
             return 0;
         }
         data++;
     }
+
     return 1;
 }
 
 int is_string(const char *data, size_t data_size) {
-    for (char *p = data; p <= data + data_size && (*data != ' ' && *data != '\n' && *data != '\0'); p++) {
-        if (!is_alpha(*data) || (*data != ' ' && *data != '\n' && *data != '\0')) {
+    const char* end = data + data_size;
+
+    if (data == end) {
+        return 0;
+    }
+
+    while (data < end && *data != ' ' && *data != '\n' && *data != '\0') {
+        if (!is_alpha(*data)) {
             return 0;
         }
+        data++;
     }
+
     return 1;
 }
 
@@ -76,7 +95,6 @@ struct array_stats analyze_array(const char *array, size_t array_size) {
     struct array_stats array_stats = {0, 0, 0, 0, 0, 0, 0};
 
     const char *array_pointer = array;
-    int temp_int = 0;
 
     while (array_pointer < array + array_size) {
         if (is_alpha(*array_pointer)) {
@@ -96,19 +114,11 @@ struct array_stats analyze_array(const char *array, size_t array_size) {
         }
 
         if (is_integer(array_pointer, array_size)) {
-            for (const char *pointer = array_pointer; pointer < array + array_size && (*pointer != ' ' && *pointer != '\n' && *pointer != '\0'); ++pointer) {
-                temp_int = temp_int * 10 + *pointer;
+            for (const char* pointer = array_pointer; pointer < array + array_size && *pointer != ' ' && *pointer != '\n' && *pointer != '\0'; pointer++) {
+                array_stats.int_sum = array_stats.int_sum * 10 + (*pointer - '0');
             }
-
             array_stats.ints++;
-            array_stats.int_sum += temp_int;
         }
-
-        else if (is_string(array_pointer, array_size)) {
-            array_stats.strings++;
-        }
-
-        array_pointer++;
     }
 
     return array_stats;
