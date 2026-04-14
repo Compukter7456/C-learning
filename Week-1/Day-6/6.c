@@ -8,19 +8,56 @@ struct string_stats {
     int other;
 };
 
-int is_alpha(char data) {
+struct array_stats {
+    int ints;
+    int strings;
+
+    long long int_sum;
+
+    int letters;
+    int digits;
+    int spaces;
+    int others;
+};
+
+int is_alpha(const char data) {
     if (('A' <= data && data <= 'Z') || ('a' <= data && data <= 'z')) {
         return 1;
     }
     return 0;
 }
 
-int is_digit(char data) {
+int is_digit(const char data) {
     if ('0' <= data && data <= '9') {
         return 1;
     }
     return 0;
 }
+
+void swap_integers(int *a, int *b) {
+    *a = *a + *b;
+    *b = *a - *b;
+    *a = *a - *b;
+}
+
+int is_integer(const char *data, size_t data_size) {
+    for (size_t i = 0; i < data_size && (data[i] != ' ' || data[i] != '\n' || data[i] != '\0'); ++i) {
+        if (!is_digit(data[i])) {
+            return 0;
+        }
+    }
+    return 1;
+}
+
+void print_array_stats(struct string_stats array_stats) {
+    printf("Array stats: \n");
+    printf("Letters: %d\n", array_stats.letters);
+    printf("Digits: %d\n", array_stats.digits);
+    printf("Spaces: %d\n", array_stats.spaces);
+    printf("Other data: %d\n", array_stats.other);
+    printf("Total array size (in bytes): %zu\n", array_stats.length);
+}
+
 
 struct string_stats analyze_array_data(const char *array, size_t array_size) {
     struct string_stats array_stats = {0, 0, 0, array_size, 0};
@@ -50,13 +87,8 @@ struct string_stats analyze_array_data(const char *array, size_t array_size) {
     return array_stats;
 }
 
-void print_array_stats(struct string_stats array_stats) {
-    printf("Array stats: \n");
-    printf("Letters: %d\n", array_stats.letters);
-    printf("Digits: %d\n", array_stats.digits);
-    printf("Spaces: %d\n", array_stats.spaces);
-    printf("Other data: %d\n", array_stats.other);
-    printf("Total array size (in bytes): %zu\n", array_stats.length);
+int analyze_array_advanced(int *array, size_t array_size) {
+    return 0;
 }
 
 int main(void) {
