@@ -28,8 +28,12 @@ int is_digit(const char data) {
 }
 
 int is_integer(const char *data, size_t data_size) {
-    for (size_t i = 0; i < data_size && (data[i] != ' ' || data[i] != '\n' || data[i] != '\0'); ++i) {
-        if (!is_digit(data[i])) {
+    for (size_t i = 0; i < data_size && (data[i] != ' ' && data[i] != '\n' && data[i] != '\0'); ++i) {
+        if (data[i] == '-' || data[i] == '+') {
+            ++i;
+        }
+
+        if (!is_digit(data[i]) || (data[i] != ' ' && data[i] != '\n' && data[i] != '\0')) {
             return 0;
         }
     }
@@ -37,8 +41,8 @@ int is_integer(const char *data, size_t data_size) {
 }
 
 int is_string(const char *data, size_t data_size) {
-    for (size_t i = 0; i < data_size && (data[i] != ' ' || data[i] != '\n' || data[i] != '\0'); ++i) {
-        if (!is_alpha(data[i])) {
+    for (size_t i = 0; i < data_size && (data[i] != ' ' && data[i] != '\n' && data[i] != '\0'); ++i) {
+        if (!is_alpha(data[i]) || (data[i] != ' ' && data[i] != '\n' && data[i] != '\0')) {
             return 0;
         }
     }
@@ -87,8 +91,7 @@ struct array_stats analyze_array(const char *array, size_t array_size) {
         }
 
         if (is_integer(array_pointer, array_size)) {
-            printf("Integer found: %s\n", array_pointer);
-            for (const char *pointer = array_pointer; pointer < array + array_size && (*pointer != ' ' || *pointer != '\n' || *pointer != '\0'); ++pointer) {
+            for (const char *pointer = array_pointer; pointer < array + array_size && (*pointer != ' ' && *pointer != '\n' && *pointer != '\0'); ++pointer) {
                 temp_int = temp_int * 10 + *pointer;
             }
 
@@ -97,7 +100,6 @@ struct array_stats analyze_array(const char *array, size_t array_size) {
         }
 
         else if (is_string(array_pointer, array_size)) {
-            printf
             array_stats.strings++;
         }
 
