@@ -32,12 +32,11 @@ int is_integer(const char *data, size_t data_size) {
         return 0;
     }
 
-    for (size_t i = 0; i < data_size && (*data != ' ' && *data != '\n' && *data != '\0'); ++i) {
-        if (*data == '-' || *data == '+') {
+    if (*data == '-' || *data == '+') {
             data++;
-            continue;
-        }
+    }
 
+    while (data < (data + data_size) && (*data != ' ' && *data != '\n' && *data != '\0')) {
         if (!is_digit(*data)) {
             return 0;
         }
@@ -47,8 +46,8 @@ int is_integer(const char *data, size_t data_size) {
 }
 
 int is_string(const char *data, size_t data_size) {
-    for (size_t i = 0; i < data_size && (data[i] != ' ' && data[i] != '\n' && data[i] != '\0'); ++i) {
-        if (!is_alpha(data[i]) || (data[i] != ' ' && data[i] != '\n' && data[i] != '\0')) {
+    for (char *p = data; p <= data + data_size && (*data != ' ' && *data != '\n' && *data != '\0'); p++) {
+        if (!is_alpha(*data) || (*data != ' ' && *data != '\n' && *data != '\0')) {
             return 0;
         }
     }
