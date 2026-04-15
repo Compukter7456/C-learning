@@ -1,7 +1,8 @@
 #include <stdio.h>
+#include <string.h>
 
-int is_alpha(const char* data) {
-    if (('A' <= *data && *data <= 'Z') || ('a' <= *data && *data <= 'z')) {
+int is_alpha(const char data) {
+    if (('A' <= data && data <= 'Z') || ('a' <= data && data <= 'z')) {
         return 1;
     }
     return 0;
@@ -37,7 +38,7 @@ int count_words(const char* array, size_t array_size) {
     }
 
     while (array <= end) {
-        if(is_alpha(array) && array != end && (*(array+1) == ' ' || *(array+1) == '\n' || *(array+1) == '\t')) {
+        if(is_alpha(*array) && array != end && (*(array+1) != ',' && *(array+1) != '.' && *(array+1) != ' ' && *(array+1) != '\n' && *(array+1) != '\t')) {
             is_word = 1;
             array++;
         }
@@ -50,6 +51,10 @@ int count_words(const char* array, size_t array_size) {
         else {
             array++;
         }
+    }
+
+    if (is_word) {
+        words++;
     }
 
     return words;
@@ -76,8 +81,8 @@ int main(void) {
     }
     printf("\n");
 
-    const char* test_string = "Hello, Worlddew. Here is some3 str1ng5";
-    printf("Number of strings in \"%s\" array: %d\n", test_string, count_words(test_string, sizeof(test_string)));
+    const char* test_string = "Hello, Worlddew. Here is s0me strs";
+    printf("Number of strings in \"%s\" array: %d\n", test_string, count_words(test_string, strlen(test_string)));
     return 0;
 
 }
