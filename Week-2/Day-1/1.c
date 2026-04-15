@@ -30,31 +30,34 @@ int reverse_array(int* array, size_t array_size) {
 
 int count_words(const char* array, size_t array_size) {
     const char* end = array + array_size - 1;
-    int is_word = 0;
+    int is_word = 0;;
     int words = 0;
 
-    if (array == end) {
+    if (array == NULL || array_size == 0 || array == end) {
         return 0;
     }
 
     while (array <= end) {
-        if(is_alpha(*array) && array != end && (*(array+1) != ',' && *(array+1) != '.' && *(array+1) != ' ' && *(array+1) != '\n' && *(array+1) != '\t')) {
-            is_word = 1;
+        while (array < end && (*array == ' ' || *array == '\n' || *array == '\t' || *array == ',' || *array == '.')) {
             array++;
         }
 
-        else if(is_word) {
+        if (array >= end) {
+            break;
+        }
+
+        is_word = 1;
+
+        while (array <= end && *array != ' ' && *array != '\n' && *array != '\t' && *array != ',' && *array != '.') {
+            if (!is_alpha(*array)) {
+                is_word = 0;
+            }
+            array++;
+        }
+
+        if (is_word) {
             words++;
-            is_word = 0;
         }
-        
-        else {
-            array++;
-        }
-    }
-
-    if (is_word) {
-        words++;
     }
 
     return words;
