@@ -1,0 +1,4 @@
+Day-7
+- Learned pointers
+- Wrote a function that reverses array of numbers using pointers
+- Wrote a function that counts words in array
