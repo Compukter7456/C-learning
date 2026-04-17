@@ -15,11 +15,19 @@ void pointersBehaviour(void) {
     int* number_pointer = &number;
     // This creates number_pointer variable. number_pointer returns memory address, *number_pointer returns data, stored at that memory address
     // & operator returns memory address of the variable. So &number returns memory address of number
-    printf("Value at stored memory address: %d\n", *number_pointer);
-    printf("Memory address of numbers variable: %p\n", number_pointer); // %p is used to print memory addresses
-    printf("Memory address of number_pointer pointer: %p\n", &number_pointer); // &number_pointer returns memory address of number_pointer
+    printf("Value stored at %p memory address: %d\n", number_pointer, *number_pointer);
+    printf("Memory address of number's variable: %p\n", number_pointer); // %p is used to print memory addresses
+    printf("Memory address of number_pointer's pointer: %p\n", &number_pointer); // &number_pointer returns memory address of number_pointer
+
+    int** number_pointer_pointer = &number_pointer; 
+    // This is pointer that points to a pointer, it stores memory address of number_pointer
+    // We can do as much levels of pointers as we want 
+    printf("Value stored at %p memory address: %p\n", number_pointer_pointer, *number_pointer_pointer);
+    printf("Memory address of number_pointer_pointer's pointer: %p\n", &number_pointer_pointer);
+
 }
 
+ 
 int main(void) {
     pointersBehaviour();
 
