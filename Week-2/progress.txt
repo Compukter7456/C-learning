@@ -8,3 +8,4 @@ Day-8
 - Wrote a function that explains pointers
 - Wrote a function that explains strings and arrays
 - Wrote a function that explains array of strings and uses pointers to pointers to work with that array
+- Wrote a function that takes pointer to array of floats and number of elements and calculates average

@@ -118,9 +118,29 @@ void array_of_strings(void) {
     }
 }
 
+float average(const float* array, size_t array_elements) {
+    const float* end = array + array_elements;
+
+    if (array == NULL || array_elements == 0) {
+        return 0.0f;
+    }
+
+    float sum = 0.0f;
+
+    while (array < end) {
+        sum += *array;
+        array++;
+    }
+
+    return sum / array_elements;
+}
+
 int main(void) {
-    pointersBehaviour();
-    datasets();
-    pointers_with_datasets();
-    array_of_strings();
+    // pointersBehaviour();
+    // datasets();
+    // pointers_with_datasets();
+    // array_of_strings();
+
+    float numbers[] = {534.653, 3456436.635, 53453.35465, 65346.56, 534.5346, 6.536, 654654.654, 654.6456};
+    printf("Average float in array is: %f\n", average(numbers, sizeof(numbers) / sizeof(numbers[0])));
 }
