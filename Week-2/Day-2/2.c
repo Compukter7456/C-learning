@@ -79,7 +79,12 @@ void pointersBehaviour(void) {
         printf("%zu's array element's memory address: %p\n", i, &array[i]);
     }
     // We will see that each element is stored one after another in memory
-    
+    // We can use pointers to easily work with arrays
+
+    char* array_pointer = &array[0]; // Create a pointer which stores memory address of the first element of the array
+    for (size_t i = 0; i < sizeof(array) / sizeof(array[0]); i++) {
+        printf("%zu's array element's value: %c\n", i, *(array_pointer + i));
+    }
  
 }
 
