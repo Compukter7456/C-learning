@@ -135,12 +135,32 @@ float average(const float* array, size_t array_elements) {
     return sum / array_elements;
 }
 
+int print_n_word(const char** array, size_t array_size, int word_number) {
+    if (array == NULL || array_size == 0 || word_number <= 0 || word_number > (int)array_size) {
+        printf("Invalid input\n");
+        return -1;
+    }
+
+    const char* word  = *(array + word_number - 1);
+
+    printf("%d's word in set array is: ", word_number);
+    while (*word != '\0') {
+        printf("%c", *word);
+        word++;
+    }
+    printf("\n");
+
+    return 0;
+}
+
 int main(void) {
+    float numbers[] = {534.653, 3456436.635, 53453.35465, 65346.56, 534.5346, 6.536, 654654.654, 654.6456};
+    const char* words[] = {"Hello", "GitHub", "from", "C"};
     // pointersBehaviour();
     // datasets();
     // pointers_with_datasets();
     // array_of_strings();
 
-    float numbers[] = {534.653, 3456436.635, 53453.35465, 65346.56, 534.5346, 6.536, 654654.654, 654.6456};
-    printf("Average float in array is: %f\n", average(numbers, sizeof(numbers) / sizeof(numbers[0])));
+    printf("Average of floats array is: %f\n", average(numbers, sizeof(numbers) / sizeof(numbers[0])));
+    print_n_word(&words[0], sizeof(words) / sizeof(words[0]), 2);
 }
