@@ -44,7 +44,7 @@ void pointersBehaviour(void) {
 
     // Array is similar to string. It just doesn't contain '\0' at the end
     // Array is a contiguous sequence of elements of the same type. It can be of any type
-    // In string we can understand where it ends, because it has '\0' in the end. 
+    // In string we can understand where it ends, because it has '\0' in the end
     // In array we don't have such marker, so we need to store size of the array in separate variable
     int numbers_array[] = {1, 2, 3, 4, 5};
     // This creates 20 bytes size array that looks like: {1, 2, 3, 4, 5}
