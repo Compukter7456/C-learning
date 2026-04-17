@@ -109,9 +109,9 @@ void array_of_strings(void) {
         char* str = *(array_pointer + i);
         char* str_start = str;
 
-        printf("Memory address of the %zu' array's pointer is: %p\n", i, (void*)str);
+        printf("Memory address of the %zu' array's pointer is: %p\n", i, str);
         while (*str != '\0') {
-            printf("Memory address of the %zu's character is: %p, value: %c\n", str - str_start, (void*)str, *str);
+            printf("Memory address of the %zu's character is: %p, value: %c\n", str - str_start, str, *str);
             str++;
         }
         printf("\n");

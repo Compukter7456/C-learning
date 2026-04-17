@@ -2,3 +2,9 @@ Day-7
 - Learned pointers
 - Wrote a function that reverses array of numbers using pointers
 - Wrote a function that counts words in array
+
+Day-8
+- Learned pointers and pointers to pointers, arrays and strings
+- Wrote a function that explains pointers
+- Wrote a function that explains strings and arrays
+- Wrote a function that explains array of strings and uses pointers to pointers to work with that array
