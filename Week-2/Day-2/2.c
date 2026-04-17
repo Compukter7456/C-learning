@@ -88,8 +88,39 @@ void pointersBehaviour(void) {
  
 }
 
+void array_of_strings(void) {
+    // Array of strings is a 2d array - array of pointers which stores pointers to the first element of each string
+    char* array_of_strings[] = {"Hello", "GitHub", "from", "C"};
+    // This creates 32 bytes array of 4 pointers, each pointer stores memory address of the first element
+    // array_of_strings stores memory address of the first pointer in created array
+    char** array_pointer = array_of_strings;
+
+    for (size_t i = 0; i < sizeof(array_of_strings) / sizeof(array_of_strings[0]); i++) {
+        char* str = *(array_pointer + i);
+
+        while (*str != '\0') {
+            printf("%c", *str);
+            str++;
+        }
+        printf("\n");
+    }
+
+    for (size_t i = 0; i < sizeof(array_of_strings) / sizeof(array_of_strings[0]); i++) {
+        char* str = *(array_pointer + i);
+        char* str_start = str;
+
+        printf("Memory address of the %zu' array's pointer is: %p\n", i, (void*)str);
+        while (*str != '\0') {
+            printf("Memory address of the %zu's character is: %p, value: %c\n", str - str_start, (void*)str, *str);
+            str++;
+        }
+        printf("\n");
+    }
+}
+
 int main(void) {
     pointersBehaviour();
     datasets();
     pointers_with_datasets();
+    array_of_strings();
 }
