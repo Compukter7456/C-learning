@@ -12,9 +12,16 @@ Day-8
 - Wrote a function that takes a pointer to an array of strings, its size, and a word index, and prints the selected word
 
 Dat-10
-- Learned strlen() strcpy()
+- Learned strlen(), strcpy()
 - Wrote a function that explains strlen(), strcpy(), strcmp() and strcat()
 - Implemented strlen() function
 - Implemented strcpy() function
 - Implemented strcmp() function
 - Implemented strcat() function
+
+Day-11
+- Learned malloc(), calloc(), realloc(), free()
+- Wrote a function that explains malloc()
+- Wrote a function that explains calloc()
+- Wrote a function that explains realloc()
+- Wrote a function that allocates a memory block for a given number of integers and returns a pointer to it
