@@ -13,6 +13,8 @@ Day-8
 
 Dat-10
 - Learned strlen() strcpy()
-- Wrote a function that explains strlen() and strcpy()
+- Wrote a function that explains strlen(), strcpy(), strcmp() and strcat()
 - Implemented strlen() function
 - Implemented strcpy() function
+- Implemented strcmp() function
+- Implemented strcat() function
