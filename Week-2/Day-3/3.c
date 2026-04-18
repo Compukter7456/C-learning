@@ -20,11 +20,15 @@ int my_strcpy(const char* source, char* dest, size_t source_size, size_t dest_si
         return -1;
     }
 
-    while (*source != '\0') {
-        *dest++ = *source++;
+    size_t i = 0;
+
+    while (i < source_size && *source != '\0') {
+        *(dest + i) = *(source + i);
+        i++;
     }
 
-    *dest = '\0';
+    *(dest + i) = '\0';
+    
     return 0;
 } 
 
