@@ -49,6 +49,25 @@ int my_strcmp(const char *str1, const char *str2, size_t str1_size, size_t str2_
     return *(str1 + i) - *(str2 + i);
 }
 
+char* my_strcat(char* dest, const char* src, size_t dest_size){
+    if (dest == NULL || src == NULL || dest_size == 0) {
+        return NULL;
+    }
+
+    size_t i = 0;
+    size_t dest_net = my_strlen(dest);
+
+    while (i < dest_size - dest_net - 1 && *(src + i) != '\0') {
+        *(dest + dest_net + i) = *(src + i);
+        i++;
+    }
+
+    *(dest + dest_net + i) = '\0';
+
+    return dest;
+}
+
+
 void strlen_demo(void) {
     // strlen() calculates the length of a string, excluding the null terminator
     // strlen() returns size_t result
@@ -99,8 +118,14 @@ void strcat_demo(void) {
     strcat(array, "Hello");
     strcat(array, " from");
     strcat(array, " C");
-    printf("Concatenated string: %s\n", array);
+    printf("Concatenated string using strcat(): %s\n", array);
+
+    char my_array[64] = "Hello";
+    my_strcat(my_array, " from", sizeof(my_array));
+    my_strcat(my_array, " C", sizeof(my_array));
+    printf("Concatenated string using my_strcat(): %s\n", my_array);
 }
+
 int main() {
     // strlen_demo();
     // strcpy_demo();
