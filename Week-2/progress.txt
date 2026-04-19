@@ -27,6 +27,10 @@ Day-11
 - Wrote a function that allocates a memory block for a given number of integers and returns a pointer to it
 
 Day-12
-- Learned struct
+- Learned struct, fprintf()
 - Wrote a function that calculates square root of the number, using Newtons method
 - Wrote a function that calculates distance between 2 points in 2d dimension 
+- Wrote a function that takes a list of structs with students info and returns pointer to the student with the best grade
+- Wrote a function that takes a list of structs with students info and prints them in console
+- Wrote a function that takes pointer to the string, calculates it's size, allocates n bytes, copies original sring there and returns pointer to the new list
+- Wrote a function that creates dynamical list for floats (without shrinking, for now). Exit on 0
