@@ -5,6 +5,12 @@ struct point {
     int y;
 };
 
+struct student {
+    char name[64];
+    unsigned short int age;
+    float grade;
+};
+
 // Newton's method of square root calculation
 float calculate_sqrt(float number) {
     if (number <= 0) {
@@ -34,7 +40,7 @@ float calculate_distance(struct point p1, struct point p2) {
     return calculate_sqrt(distance);
 }
 
-int main(void) {
+void calculate_distance_between_points(void) {
     struct point p1 = {0, 0};
     struct point p2 = {0, 0};
     char buff[128];
@@ -65,4 +71,51 @@ int main(void) {
 
     printf("Distance between a(%d, %d) and b(%d, %d) is %f\n", p1.x, p1.y, p2.x, p2.y, calculate_distance(p1, p2));
 
+    return 0;
+}
+
+struct student *find_best_student(struct student *students, size_t ammount) {
+    if (ammount <= 0 || students == NULL) {
+        return -1;
+    }
+
+    float best_grade = 0;
+    size_t i = 0;
+
+    while (i < ammount) {
+        struct student test = *(students + i);
+
+        if (test.grade > best_grade) {
+            best_grade = test.grade;
+        }
+        i++;
+    }
+
+    return students + i;
+}
+
+void print_students(struct student *students, size_t ammount) {
+    if (ammount <= 0 || students == NULL) {
+        return -1;
+    }
+
+    for (size_t i = 0; i < ammount; i++) {
+        struct student student = *(students + i);
+        printf("\n%d'th student\n");
+        printf("Name: %s, age: %hu, average grade: %f\n", student.name, student.age, student.grade);
+    }
+}
+
+int main(void) {
+    struct student group[5] = {
+        {"Alice", 20, 95.5},
+        {"Bob",   21, 87.0},
+        {"Carol", 19, 91.3},
+        {"Dave",  22, 78.5},
+        {"Eve",   20, 88.0}
+    };
+
+    print_students(group, sizeof(group) / sizeof(group[0]));
+    printf("Student with the best grade is: ");
+    return 0;
 }
