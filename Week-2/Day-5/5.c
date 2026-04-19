@@ -40,7 +40,7 @@ float calculate_distance(struct point p1, struct point p2) {
     return calculate_sqrt(distance);
 }
 
-void calculate_distance_between_points(void) {
+int calculate_distance_between_points(void) {
     struct point p1 = {0, 0};
     struct point p2 = {0, 0};
     char buff[128];
@@ -74,9 +74,9 @@ void calculate_distance_between_points(void) {
     return 0;
 }
 
-struct student *find_best_student(struct student *students, size_t ammount) {
+struct student* find_best_student(struct student *students, size_t ammount) {
     if (ammount <= 0 || students == NULL) {
-        return -1;
+        return NULL;
     }
 
     float best_grade = 0;
@@ -96,12 +96,12 @@ struct student *find_best_student(struct student *students, size_t ammount) {
 
 void print_students(struct student *students, size_t ammount) {
     if (ammount <= 0 || students == NULL) {
-        return -1;
+        return;
     }
 
     for (size_t i = 0; i < ammount; i++) {
         struct student student = *(students + i);
-        printf("\n%d'th student\n");
+        printf("\n%zu'th student\n", i);
         printf("Name: %s, age: %hu, average grade: %f\n", student.name, student.age, student.grade);
     }
 }
@@ -116,6 +116,8 @@ int main(void) {
     };
 
     print_students(group, sizeof(group) / sizeof(group[0]));
-    printf("Student with the best grade is: ");
+    struct student* best_student = find_best_student(group, 5);
+
+    printf("Student with the best grade is: %s", best_student->name);
     return 0;
 }
