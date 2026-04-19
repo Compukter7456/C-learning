@@ -25,3 +25,8 @@ Day-11
 - Wrote a function that explains calloc()
 - Wrote a function that explains realloc()
 - Wrote a function that allocates a memory block for a given number of integers and returns a pointer to it
+
+Day-12
+- Learned struct
+- Wrote a function that calculates square root of the number, using Newtons method
+- Wrote a function that calculates distance between 2 points in 2d dimension
