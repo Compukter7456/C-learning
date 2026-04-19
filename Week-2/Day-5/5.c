@@ -79,19 +79,19 @@ struct student* find_best_student(struct student *students, size_t ammount) {
         return NULL;
     }
 
+    struct student* best_student = NULL;
     float best_grade = 0;
-    size_t i = 0;
 
-    while (i < ammount) {
+    for (size_t i = 0; i < ammount; i++) {
         struct student test = *(students + i);
 
         if (test.grade > best_grade) {
             best_grade = test.grade;
+            best_student = students + i;
         }
-        i++;
     }
 
-    return students + i;
+    return best_student;
 }
 
 void print_students(struct student *students, size_t ammount) {
@@ -118,6 +118,6 @@ int main(void) {
     print_students(group, sizeof(group) / sizeof(group[0]));
     struct student* best_student = find_best_student(group, 5);
 
-    printf("Student with the best grade is: %s", best_student->name);
+    printf("Student with the best grade is: %s with average grade %f\n", best_student->name, best_student->grade);
     return 0;
 }
