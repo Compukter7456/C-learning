@@ -23,6 +23,9 @@ struct contact_book {
     size_t capacity; // Size of dynamical array
 };
 
+int my_strcmp(const char *str1, const char *str2);
+size_t my_strlen(const char *str);
+
 // Create contacts book
 // Return NULL on any error
 struct contact_book* create_book(void);

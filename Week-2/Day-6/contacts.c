@@ -17,6 +17,21 @@ int my_strcmp(const char *str1, const char *str2) {
     return *(str1 + i) - *(str2 + i);
 }
 
+size_t my_strlen(const char *str) {
+    if (str == NULL) {
+        return 0;
+    }
+
+    size_t length = 0;
+
+    while (*str != '\0') {
+        length++;
+        str++;      
+    }
+
+    return length;
+}
+
 struct contact_book* create_book(void) {
     struct contact_book *book = (struct contact_book*)malloc(sizeof(struct contact_book));
 
@@ -38,8 +53,8 @@ struct contact_book* create_book(void) {
     return book;
 }
 
-int add_contact(struct contact_book* book, const struct contact* contact) {
-    if (book == NULL || contact == NULL) {
+int add_contact(struct contact_book* book, const struct contact* contact_data) {
+    if (book == NULL || contact_data == NULL) {
         fprintf(stderr, "[Error] book or contact pointer is NULL\n");
         return -1;
     }
@@ -59,7 +74,7 @@ int add_contact(struct contact_book* book, const struct contact* contact) {
 
     }
 
-    *(book->contacts + book->count) = *contact;
+    *(book->contacts + book->count) = *contact_data;
     book->count++;
 
     return 0;
