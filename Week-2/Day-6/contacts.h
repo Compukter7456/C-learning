@@ -30,15 +30,15 @@ struct contact_book* create_book(void);
 // Add a new contact to the book
 // Resize dynamical array in case no more space left in the array
 // Return 0 on success, -1 on failure
-int add_contact(struct contact_book* book, struct contact* contact);
+int add_contact(struct contact_book* book, const struct contact* contact);
 
 // Search for contact by name, phone or email
 // Return pointer to found struct in case of success
 // Return pointer = NULL in case of failure
-struct contact* find_contact(struct contact_book* book, const char* name);
+struct contact* find_contact(const struct contact_book* book, const char* name);
 
 // Print all contacts in contact books
-void print_contacts(struct contact_book* book);
+void print_contacts(const struct contact_book* book);
 
 // Free allocated memory
 void free_book(struct contact_book* book);

@@ -38,7 +38,7 @@ struct contact_book* create_book(void) {
     return book;
 }
 
-int add_contact(struct contact_book* book, struct contact* contact) {
+int add_contact(struct contact_book* book, const struct contact* contact) {
     if (book == NULL || contact == NULL) {
         fprintf(stderr, "[Error] book or contact pointer is NULL\n");
         return -1;
@@ -65,7 +65,7 @@ int add_contact(struct contact_book* book, struct contact* contact) {
     return 0;
 }
 
-const struct contact* find_contact(struct contact_book* book, const char* name) {
+struct contact* find_contact(const struct contact_book* book, const char* name) {
     if (book == NULL || name == NULL) {
         fprintf(stderr, "[Error] book or name pointer is NULL\n");   
         return NULL;
