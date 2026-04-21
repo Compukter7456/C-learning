@@ -5,10 +5,6 @@
 #define GROWTH_STEP 5
 
 int my_strcmp(const char *str1, const char *str2) {
-    if (str1 == NULL || str2 == NULL) {
-        return -1;
-    }
-
     size_t i = 0;
 
     while (*(str1 + i) != '\0' && *(str2 + i) != '\0') {
@@ -76,6 +72,11 @@ struct contact* find_contact(struct contact_book* book, const char* name) {
     }
 
     for (size_t i = 0; i < book->count; i++) {
-
+        struct contact* contact = book->contacts + i;
+        if (my_strcmp(name, contact->name) == 0) {
+            return contact;
+        }
     }
+
+    return NULL;
 }

@@ -35,7 +35,7 @@ int add_contact(struct contact_book* book, struct contact* contact);
 // Search for contact by name, phone or email
 // Return pointer to found struct in case of success
 // Return pointer = NULL in case of failure
-struct contact* find_contact(struct contact_book* book, char* name);
+struct contact* find_contact(struct contact_book* book, const char* name);
 
 // Print all contacts in contact books
 void print_contacts(struct contact_book* book);
