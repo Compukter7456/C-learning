@@ -25,7 +25,7 @@ struct contact_book* create_book(void) {
         return NULL;
     }
 
-    book->contacts = (struct contact*)malloc(sizeof(struct contact) * INITIAL_CAPACITY);
+    book->contacts = malloc(sizeof(struct contact) * INITIAL_CAPACITY);
     if (book->contacts == NULL) {
         fprintf(stderr, "[Error] contacts malloc failed\n");
         free(book);
@@ -45,7 +45,7 @@ int add_contact(struct contact_book* book, struct contact* contact) {
     }
 
     if (book->count >= book->capacity) {
-        struct contact* tmp = (struct contact*)realloc(book->contacts, sizeof(struct contact) * (book->count + GROWTH_STEP));
+        struct contact* tmp = realloc(book->contacts, sizeof(struct contact) * (book->count + GROWTH_STEP));
         
         if (tmp == NULL) {
             fprintf(stderr, "Error allocating %zu bytes for the bigger list of contacts\n", sizeof(struct contact) * (book->count + GROWTH_STEP));
@@ -65,7 +65,7 @@ int add_contact(struct contact_book* book, struct contact* contact) {
     return 0;
 }
 
-struct contact* find_contact(struct contact_book* book, const char* name) {
+const struct contact* find_contact(struct contact_book* book, const char* name) {
     if (book == NULL || name == NULL) {
         fprintf(stderr, "[Error] book or name pointer is NULL\n");   
         return NULL;
@@ -79,4 +79,42 @@ struct contact* find_contact(struct contact_book* book, const char* name) {
     }
 
     return NULL;
+}
+
+void print_contacts(const struct contact_book* book) {
+    if (book == NULL) {
+        fprintf(stderr, "[Error] book pointer is NULL\n");
+        return;
+    }
+    
+    if (book->contacts == NULL) {
+        fprintf(stderr, "[Error] contacts pointer is NULL\n");
+        return;
+    }
+
+    if (book->count == 0) {
+        fprintf(stdout, "[Info] Contact book is empty\n");
+        return;
+    }
+
+    fprintf(stdout, "[Info] All contacts in contacts book:\n");
+    for (size_t i = 0; i < book->count; i++) {
+        struct contact* contact = book->contacts + i;
+
+        fprintf(stdout, "\nContact #%zu:\n", i);
+        fprintf(stdout, "Name: %s\n", contact->name);
+        fprintf(stdout, "Phone: %s\n", contact->phone);
+        fprintf(stdout, "Email: %s\n", contact->email);
+    }
+    fprintf(stdout, "[Info] Finished\n");
+}
+
+void free_book(struct contact_book* book) {
+    if (book == NULL) {
+        fprintf(stderr, "[Error] book pointer is NULL\n");
+        return;
+    }
+
+    free(book->contacts);
+    free(book);
 }
