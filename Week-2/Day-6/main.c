@@ -26,12 +26,13 @@ int main(void) {
 
         switch (choice) {
             case 0:
-                fprintf(stdout, "[Info] Exiting...\n");
-
                 if (is_initalized) {
+                    fprintf(stdout, "[Info] Cleaning contacts book before exiting...\n");
+
                     free_book(book);
                 }
 
+                fprintf(stdout, "[Info] Exiting...\n");
                 return 0;
         
 
@@ -82,6 +83,10 @@ int main(void) {
                     break;
                 }
 
+                strip_newline(contact_data.name);
+                strip_newline(contact_data.email);
+                strip_newline(contact_data.phone);
+
                 fprintf(stdout, "[Info] Successfully added your contact to the book\n");
                 add_contact(book, &contact_data);
                 break;
@@ -98,6 +103,7 @@ int main(void) {
                         fprintf(stderr, "[Error] Error writing name\n");
                         break;
                     }
+                strip_newline(buff);
 
                 struct contact* found_contact = find_contact(book, buff);
 

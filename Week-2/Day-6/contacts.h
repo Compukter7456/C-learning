@@ -25,6 +25,7 @@ struct contact_book {
 
 int my_strcmp(const char *str1, const char *str2);
 size_t my_strlen(const char *str);
+void strip_newline(char* str);
 
 // Create contacts book
 // Return NULL on any error

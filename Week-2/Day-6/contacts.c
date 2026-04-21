@@ -4,7 +4,7 @@
 
 #define GROWTH_STEP 5
 
-int my_strcmp(const char *str1, const char *str2) {
+int my_strcmp(const char* str1, const char* str2) {
     size_t i = 0;
 
     while (*(str1 + i) != '\0' && *(str2 + i) != '\0') {
@@ -17,7 +17,7 @@ int my_strcmp(const char *str1, const char *str2) {
     return *(str1 + i) - *(str2 + i);
 }
 
-size_t my_strlen(const char *str) {
+size_t my_strlen(const char* str) {
     if (str == NULL) {
         return 0;
     }
@@ -30,6 +30,10 @@ size_t my_strlen(const char *str) {
     }
 
     return length;
+}
+
+void strip_newline(char* str) {
+    str[my_strlen(str) - 1] = '\0';
 }
 
 struct contact_book* create_book(void) {
@@ -70,7 +74,7 @@ int add_contact(struct contact_book* book, const struct contact* contact_data) {
         book->capacity = book->count + GROWTH_STEP;
         book->contacts = tmp;
 
-        fprintf(stdout, "[Info] Size limit exceeded, added %zu bytes to contacts array. New size: %zu\n", sizeof(struct contact) * GROWTH_STEP, sizeof(struct contact) * (book->count));
+        fprintf(stdout, "[Info] Size limit exceeded, added %zu bytes to contacts array. New size: %zu\n", sizeof(struct contact) * book->count, sizeof(struct contact) * book->capacity);
 
     }
 
