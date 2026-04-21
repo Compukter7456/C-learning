@@ -13,13 +13,15 @@ int main(void) {
     fprintf(stdout, "2. Add contacts to the contacts book\n");
     fprintf(stdout, "3. Search contact in the contacts book\n");
     fprintf(stdout, "4. Print all contacts\n");
+    fprintf(stdout, "5. Delete contacts book\n");
     fprintf(stdout, "0. Exit program\n");
 
     
     while (1) {
         fprintf(stdout, "Your choice: ");
-        if (!fgets(buff, sizeof(buff), stdin) || sscanf(buff, "%d", choice) != 1) {
+        if (!fgets(buff, sizeof(buff), stdin) || sscanf(buff, "%d", &choice) != 1) {
             fprintf(stderr, "[Error] Invalid input\n");
+            continue;
         }
 
         switch (choice) {
@@ -32,7 +34,13 @@ int main(void) {
 
                 return 0;
         
+
             case 1: 
+                if (is_initalized) {
+                    fprintf(stdout, "[Warning] Contacts book is already created\n");
+                    break;
+                }
+
                 fprintf(stdout, "[Info] Creating contacts book...\n");
                 book = create_book();
 
@@ -40,51 +48,94 @@ int main(void) {
                     fprintf(stderr, "[Error] Failed to create book\n");
                     break;
                 }
+                
                 fprintf(stdout, "[Info] Book's memory address: %p\n", book);
+                is_initalized = 1;
                 break;
 
+
             case 2:
-                if (is_initalized) {
-                    struct contact contact_data = {"", "", ""};
+                if (!is_initalized) {
+                    fprintf(stderr, "[Error] You need to create the book first\n");
+                    break;
+                }
+                    
+                struct contact contact_data = {"", "", ""};
 
-                    fprintf(stdout, "Adding a new contact to the book\n");
+                fprintf(stdout, "Adding a new contact to the book\n");
 
-                    fprintf(stdout, "Enter contact's name: ");
-                    if (!fgets(contact_data.name, sizeof(contact_data.name), stdin) != 1) {
+                fprintf(stdout, "Enter contact's name: ");
+                if (!fgets(contact_data.name, sizeof(contact_data.name), stdin)) {
+                    fprintf(stderr, "[Error] Error writing name\n");
+                    break;
+                }
+
+                fprintf(stdout, "Enter contact's email: ");
+                if (!fgets(contact_data.email, sizeof(contact_data.email), stdin)) {
+                    fprintf(stderr, "[Error] Error writing email\n");
+                    break;
+                }
+
+                fprintf(stdout, "Enter contact's phone (max 32 symbols): ");
+                if (!fgets(contact_data.phone, sizeof(contact_data.phone), stdin)) {
+                    fprintf(stderr, "[Error] Error writing number\n");
+                    break;
+                }
+
+                fprintf(stdout, "[Info] Successfully added your contact to the book\n");
+                add_contact(book, &contact_data);
+                break;
+
+
+            case 3:
+                if (!is_initalized) {
+                    fprintf(stderr, "[Error] You need to create the book first\n");
+                    break;
+                }
+
+                fprintf(stdout, "Searching contact by name. Enter name: ");
+                    if (!fgets(buff, sizeof(buff), stdin)) {
                         fprintf(stderr, "[Error] Error writing name\n");
                         break;
                     }
 
-                    fprintf(stdout, "Enter contact's email: ");
-                    if (!fgets(contact_data.email, sizeof(contact_data.email), stdin) != 1) {
-                        fprintf(stderr, "[Error] Error writing email\n");
-                        break;
-                    }
+                struct contact* found_contact = find_contact(book, buff);
 
-                    fprintf(stdout, "Enter contact's phone (max 32 symbols): ");
-                    if (!fgets(contact_data.phone, sizeof(contact_data.phone), stdin) != 1) {
-                        fprintf(stderr, "[Error] Error writing number\n");
-                        break;
-                    }
-
-                    fprintf(stdout, "[Info] Successfully added your contact to the book\n");
-                    add_contact(book, &contact_data);
-                    break;
-                }
-                else {
-                    fprintf(stderr, "[Error] Yout need to create the book first\n");
+                if (found_contact == NULL) {
+                    fprintf(stdout, "[Info] Could not find contact with name \"%s\" \n", buff);
                     break;
                 }
 
-            case 3:
-                if (is_initalized) {
-                    print_contacts(book);
-                    break;
-                }
-                
-                fprintf(stderr, "[Error] Yout need to create the book first\n");
+                fprintf(stdout, "[Info] Found your contact at %p\n", found_contact);
+                fprintf(stdout, "Name: %s\n", found_contact->name);
+                fprintf(stdout, "Email: %s\n", found_contact->email);
+                fprintf(stdout, "Phone number: %s\n", found_contact->phone);
                 break;
+
                 
+            case 4:
+                if (!is_initalized) {
+                    fprintf(stderr, "[Error] You need to create the book first\n");
+                    break;
+                }
+                
+                print_contacts(book);
+                break;
+
+            case 5:
+                if (!is_initalized) {
+                    fprintf(stderr, "[Error] You need to create the book first\n");
+                    break;
+                }
+
+                fprintf(stdout, "[Info] Deleting contacts book...\n");
+                free_book(book);
+                is_initalized = 0;
+
+                break;
+
+            default:
+                fprintf(stdout, "[Warning] There is no such option %d\n", choice);
         }
     }
 }

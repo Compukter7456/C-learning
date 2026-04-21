@@ -116,7 +116,7 @@ void print_contacts(const struct contact_book* book) {
     for (size_t i = 0; i < book->count; i++) {
         struct contact* contact = book->contacts + i;
 
-        fprintf(stdout, "\nContact #%zu:\n", i);
+        fprintf(stdout, "\nContact #%zu:\n", i+1);
         fprintf(stdout, "Name: %s\n", contact->name);
         fprintf(stdout, "Phone: %s\n", contact->phone);
         fprintf(stdout, "Email: %s\n", contact->email);

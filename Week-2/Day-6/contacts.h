@@ -5,7 +5,7 @@
 #include <stddef.h>
 
 #define MAX_NAME    64
-#define MAX_PHONE   16
+#define MAX_PHONE   32
 #define MAX_EMAIL   64
 #define INITIAL_CAPACITY 5
 
@@ -18,7 +18,7 @@ struct contact {
 
 // Array of contacts
 struct contact_book {
-    struct contact *contacts; // Pointer to the dynamicall array of pointers, storing addresses of contact's structs
+    struct contact *contacts; // Pointer to the dynamicall array of structures
     size_t count; // Ammount of contacts
     size_t capacity; // Size of dynamical array
 };
@@ -33,7 +33,7 @@ struct contact_book* create_book(void);
 // Add a new contact to the book
 // Resize dynamical array in case no more space left in the array
 // Return 0 on success, -1 on failure
-int add_contact(struct contact_book* book, const struct contact* contact);
+int add_contact(struct contact_book* book, const struct contact* contact_data);
 
 // Search for contact by name, phone or email
 // Return pointer to found struct in case of success
