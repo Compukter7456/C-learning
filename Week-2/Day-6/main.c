@@ -4,7 +4,7 @@
 int main(void) {
     char buff[64];
     struct contact_book* book;
-    int choice = 0, is_initalized = 0;;
+    int choice = 0, is_initialized = 0;;
 
     fprintf(stdout, "Hello, this program implements simple contacts book\n");
     fprintf(stdout, "I have used .h file to separate code, structs to store data, malloc and realloc to create dynamical heap memory with growth ability\n");
@@ -26,7 +26,7 @@ int main(void) {
 
         switch (choice) {
             case 0:
-                if (is_initalized) {
+                if (is_initialized) {
                     fprintf(stdout, "[Info] Cleaning contacts book before exiting...\n");
 
                     free_book(book);
@@ -37,7 +37,7 @@ int main(void) {
         
 
             case 1: 
-                if (is_initalized) {
+                if (is_initialized) {
                     fprintf(stdout, "[Warning] Contacts book is already created\n");
                     break;
                 }
@@ -51,12 +51,12 @@ int main(void) {
                 }
                 
                 fprintf(stdout, "[Info] Book's memory address: %p\n", book);
-                is_initalized = 1;
+                is_initialized = 1;
                 break;
 
 
             case 2:
-                if (!is_initalized) {
+                if (!is_initialized) {
                     fprintf(stderr, "[Error] You need to create the book first\n");
                     break;
                 }
@@ -93,7 +93,7 @@ int main(void) {
 
 
             case 3:
-                if (!is_initalized) {
+                if (!is_initialized) {
                     fprintf(stderr, "[Error] You need to create the book first\n");
                     break;
                 }
@@ -120,7 +120,7 @@ int main(void) {
 
                 
             case 4:
-                if (!is_initalized) {
+                if (!is_initialized) {
                     fprintf(stderr, "[Error] You need to create the book first\n");
                     break;
                 }
@@ -129,14 +129,14 @@ int main(void) {
                 break;
 
             case 5:
-                if (!is_initalized) {
+                if (!is_initialized) {
                     fprintf(stderr, "[Error] You need to create the book first\n");
                     break;
                 }
 
                 fprintf(stdout, "[Info] Deleting contacts book...\n");
                 free_book(book);
-                is_initalized = 0;
+                is_initialized = 0;
 
                 break;
 
