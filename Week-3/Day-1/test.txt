@@ -1,4 +1,3 @@
-NAME    AGE   CITY
-abc     12    Chicago
+Some string. Will be pasted with fputs()
 def     25    Colego
 ghi     65    Cleveland

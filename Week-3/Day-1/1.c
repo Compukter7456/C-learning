@@ -65,9 +65,39 @@ int fgets_demo(void) {
     return 0;
 }
 
+
+int fputs_demo(void) {
+    FILE *file = fopen(WORKING_FILE, "r+");
+
+    if (file == NULL) {
+        fprintf(stderr, "[Error] Error opening %s\n", WORKING_FILE);
+        return -1;
+    }
+
+    const char* string = "Some string. Will be pasted with fputs()";
+    
+    // This will write string to the beginning of the working, overwriting the first two lines (because it contains \n)
+    fprintf(stdout, "[Info] Writing \"%s\" to %s\n", string, WORKING_FILE);
+    if (fputs(string, file) == 0) {
+        fprintf(stderr, "[Error] error writing string into file\n");
+        fclose(file);
+        return -1;
+    }
+
+    rewind(file); // Reloads file position indicator (places on the beginning) 
+    fprintf(stdout, "[Info] File's contents: \n");
+    for (int i = fgetc(file); i != EOF; i = fgetc(file)) {
+        putchar(i);
+    }
+
+    fclose(file);
+    return 0;
+}
+
 int main(void) {
     create_file();
     fscanf_demo();
     fgets_demo();
+    fputs_demo();
     return 0;
 }
