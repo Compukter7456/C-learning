@@ -1,2 +1,9 @@
 Day-14
-- Learned FILE*
+- Learned FILE *, fopen(), fclose(), fscanf(), fputs(), fread(), fwrite()
+- Wrote a function that prints file's content to stdout using fgetc() and putchar()
+- Wrote a function that creates a file and writes there some data using fprintf()
+- Wrote a function that reads file, saves it's content into buffer and prints it
+- Wrote a function that prints file's content to stdout using fgets()
+- Wrote a function that writes some string into file and prints it
+- Wrote a function that creates array of structs with students data and write them into a binary file
+- Wrote a function that reads a binary file with array of structs with students data
