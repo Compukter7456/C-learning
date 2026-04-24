@@ -2,7 +2,7 @@ CC = gcc
 CFLAGS = -Wall -Wextra -O2 -s
 
 TARGET = compiled
-SRCS = 2.c
+SRCS = cli_parser.c
 
 $(TARGET): $(SRCS)
 	$(CC) $(CFLAGS) $(SRCS) -o $(TARGET)

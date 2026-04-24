@@ -12,3 +12,4 @@ Day-15
 - Learned fseek(), ftell(), Makefile
 - Wrote a function that operates with fseek() and ftell()
 - Wrote a Makefile
+- Wrote a function that parses and checks arg parameters, saves name and age to allocated memory and prints stats
