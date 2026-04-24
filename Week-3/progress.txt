@@ -7,3 +7,8 @@ Day-14
 - Wrote a function that writes some string into file and prints it
 - Wrote a function that creates array of structs with students data and write them into a binary file
 - Wrote a function that reads a binary file with array of structs with students data
+
+Day-15 
+- Learned fseek(), ftell(), Makefile
+- Wrote a function that operates with fseek() and ftell()
+- Wrote a Makefile
