@@ -16,4 +16,6 @@ Day-15
 
 Day-16
 - Learned gdb, valgrid and gcc with -fsanitize
+- Learned open(), read(), write(), unlink(), fsync(), lseek()
 - Wrote a file that implements use after free, out of bounds and memory leak CWEs
+- Wrote a function that creates a file descriptor with open(), unlinks the file, and performs I/O using write() and read()
