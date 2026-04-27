@@ -13,3 +13,7 @@ Day-15
 - Wrote a function that operates with fseek() and ftell()
 - Wrote a Makefile
 - Wrote a function that parses and checks arg parameters, saves name and age to allocated memory and prints stats
+
+Day-16
+- Learned gdb, valgrid and gcc with -fsanitize
+- Wrote a file that implements use after free, out of bounds and memory leak CWEs
