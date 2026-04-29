@@ -25,10 +25,11 @@ Day-16
 - Wrote a function that creates a file with memfd and performs I/O with write() and read()
 
 Day-17
-- Practiced hex
-- Learned fixed size integers intX_t
-- Learned basic binary operations: AND, OR, NOR, XOR, bitwise shift left and right
-- Wrote a function that demonstrates each binary operator
-- Wrote a function that encrypts input data with xor and saves it into heap
-- Wrote a function that reads data from stdin, encrypts it with my XOR enc function and saves data to created memfd. Than reads memfd and decrypts data. Decryption is implemented with N lengthkey
-- Solved two easy leetcode problems (arrays)
+- Practiced working with hexadecimal values
+- Learned about fixed-size integers (intX_t)
+- Learned basic bitwise operations: AND, OR, XOR, NOT, and left/right shifts
+- Wrote a function that demonstrates each bitwise operator
+- Wrote a function that encrypts input data using xor and writes it to heap
+- Wrote a program that reads input from stdin, encrypts it using my XOR function, and writes encrypted data to memfd. Then reads it and decrypts original contents
+- Solved two easy LeetCode problems (arrays)
+// It was productive and interesting day
