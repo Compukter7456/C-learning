@@ -1,5 +1,11 @@
-#include <stdio.h>
+#define _GNU_SOURCE // memfd_create()
+#include <stdio.h> // printf() fprintf()
+#include <stdlib.h> // calloc() free()
+#include <unistd.h> // close(), read(), write(),
+#include <sys/mman.h> // memfd_create()
 #include <stdint.h> // For fixed size integers
+
+#define BUFF_SIZE 128
 
 int is_palindrome(int x) {
     if (x < 0) {
@@ -14,6 +20,17 @@ int is_palindrome(int x) {
     }
 
     return (x == half || x == half/10);
+}
+
+ssize_t my_strlen(const char *str) {
+    ssize_t length = 0;
+
+    while (*str != '\0') {
+        length++;
+        str++;      
+    }
+
+    return length;
 }
 
 void print_byte_binary(unsigned char c) {
@@ -55,8 +72,156 @@ void binary_operations(void) {
         print_byte_binary(array[i]);
         printf(" ");
     }
+    printf("\n");
+
+    // & --> AND
+    unsigned char a = 0b10101010;
+    unsigned char b = 0b01011011;
+    unsigned char c = a & b; // 0b00001010;
+    print_byte_binary(a);
+    printf(" & ");
+    print_byte_binary(b);
+    printf(" = ");
+    print_byte_binary(c);
+    printf("\n");
+
+    // | --> OR
+    c = a | b; // 0b11111011;
+    print_byte_binary(a);
+    printf(" | ");
+    print_byte_binary(b);
+    printf(" = ");
+    print_byte_binary(c);
+    printf("\n");
+
+    // ^ --> XOR
+    c = a ^ b; // 11110001
+    print_byte_binary(a);
+    printf(" ^ ");
+    print_byte_binary(b);
+    printf(" = ");
+    print_byte_binary(c);
+    printf("\n");
+
+    // ~ --> NOT, inversion
+    c = ~a; // 01010101
+    printf("~");
+    print_byte_binary(a);
+    printf(" = ");
+    print_byte_binary(c);
+    printf("\n");
+
+    // << --> bitwise shift left
+    c = a << 3; // shifts all bits to the left by 3 steps. x * x**n
+    print_byte_binary(a);
+    printf(" << 3");
+    printf(" = ");
+    print_byte_binary(c);
+    printf("\n");
+
+    // >> --> bitwise shift right
+    c = a >> 3; // shifts all bits to the right by 3 steps. x / x**n
+    print_byte_binary(a);
+    printf(" >> 3");
+    printf(" = ");
+    print_byte_binary(c);
+    printf("\n");
+
+}
+
+char *encrypt_decrypt(const char *array, size_t array_length, const unsigned char *xor_key, size_t xor_key_length) {
+    if (array == NULL || xor_key == NULL || array_length == 0 || xor_key_length == 0) {
+        return NULL;
+    }
+
+    char *buffer = calloc(array_length, sizeof(char));
+    if (buffer == NULL) {
+        return NULL;
+    }
+
+    for (size_t i = 0; i < array_length; i++) {
+        buffer[i] = array[i] ^ xor_key[i % xor_key_length];
+    }
+
+    return buffer;
+}
+
+int xor_encrypt_decrypt(void) {
+    const unsigned char xor_key[] = {0x43, 0xA2, 0x00, 0xBF, 0xD8};
+    int fd = memfd_create("decrypted_data", 0);
+    char *buff = calloc(BUFF_SIZE, 1);
+    size_t key_len = sizeof(xor_key);
+
+    if (fd == -1) {
+        fprintf(stderr, "[Error] Could not create memfd file\n");
+        return -1;
+    }
+
+    if (ftruncate(fd, BUFF_SIZE) == -1) {
+        fprintf(stderr, "[Error] Ftruncate failed\n");
+        close(fd);
+        return -1;
+    }
+
+    if (buff == NULL) {
+        fprintf(stderr, "[Error] Could not allocate %d bytes\n", BUFF_SIZE);
+        close(fd);
+        return -1;
+    }
+    printf("[Info] Allocated %d bytes in heap\n\n", BUFF_SIZE);
+
+    printf("Hello, enter any data: ");
+    if (!fgets(buff, BUFF_SIZE, stdin)) {
+        fprintf(stderr, "[Error] Could not write data to buff\n");
+        return -1;
+    }
+    ssize_t buff_len = my_strlen(buff);
+    printf("[Success] Saved your string to buffer\n");
+
+    printf("[Info] Encrypting your data with xor key...\n");
+    char *encrypted_data = encrypt_decrypt(buff, buff_len, xor_key, sizeof(xor_key));
+    if (encrypted_data == NULL) {
+        fprintf(stderr, "[Error] Could not encrypt your data\n");
+        close(fd);
+        free(buff);
+        return -1;
+    }
+    if (write(fd, encrypted_data, buff_len) == -1) {
+        fprintf(stderr, "[Error] Could not write data to memfd file\n");
+        close(fd);
+        free(encrypted_data);
+        free(buff);
+        return -1;
+    }
+    lseek(fd, 0, SEEK_SET);
+    printf("[Success] Encrypted your data with xor and written it to memfd\n");    
+
+    printf("Encrypted data in memfd(hex): ");
+    while (read(fd, buff, buff_len) > 0) {
+        for (ssize_t i = 0; i < buff_len; i++) {
+            printf("%02X ", buff[i]);
+        }
+    }
+    printf("\n");
+    lseek(fd, 0, SEEK_SET);
+
+    printf("Decrypted data: ");
+    while (read(fd, buff, buff_len) > 0) {
+        for (ssize_t i = 0; i < buff_len; i++) {
+            printf("%c ", buff[i] ^ xor_key[i % key_len]);
+        }
+    }
+    printf("\n");
+    lseek(fd, 0, SEEK_SET);
+
+    close(fd);
+    free(encrypted_data);
+    free(buff);
+
+    return 0;
 }
 
 int main(void) {
     binary_operations();
+    xor_encrypt_decrypt();
 }
