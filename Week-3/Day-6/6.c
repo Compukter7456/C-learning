@@ -4,6 +4,7 @@
 #include <unistd.h> // close(), read(), write(),
 #include <sys/mman.h> // memfd_create()
 #include <stdint.h> // For fixed size integers
+#include <unistd.h>
 
 #define BUFF_SIZE 128
 
@@ -147,22 +148,23 @@ char *encrypt_decrypt(const char *array, size_t array_length, const unsigned cha
 }
 
 int xor_encrypt_decrypt(void) {
+    // XOR is a primitive symmetric cipher
+    // First XOR round encrypts data, second round decrypts it
     const unsigned char xor_key[] = {0x43, 0xA2, 0x00, 0xBF, 0xD8};
-    int fd = memfd_create("decrypted_data", 0);
-    char *buff = calloc(BUFF_SIZE, 1);
     size_t key_len = sizeof(xor_key);
 
+    int fd = memfd_create("decrypted_data", 0);
     if (fd == -1) {
         fprintf(stderr, "[Error] Could not create memfd file\n");
         return -1;
     }
-
     if (ftruncate(fd, BUFF_SIZE) == -1) {
         fprintf(stderr, "[Error] Ftruncate failed\n");
         close(fd);
         return -1;
     }
 
+    char *buff = calloc(BUFF_SIZE, 1);
     if (buff == NULL) {
         fprintf(stderr, "[Error] Could not allocate %d bytes\n", BUFF_SIZE);
         close(fd);
@@ -173,50 +175,50 @@ int xor_encrypt_decrypt(void) {
     printf("Hello, enter any data: ");
     if (!fgets(buff, BUFF_SIZE, stdin)) {
         fprintf(stderr, "[Error] Could not write data to buff\n");
+        free(buff);
+        close(fd);
         return -1;
     }
     ssize_t buff_len = my_strlen(buff);
     printf("[Success] Saved your string to buffer\n");
 
     printf("[Info] Encrypting your data with xor key...\n");
-    char *encrypted_data = encrypt_decrypt(buff, buff_len, xor_key, sizeof(xor_key));
-    if (encrypted_data == NULL) {
+    char *tmp = encrypt_decrypt(buff, buff_len, xor_key, sizeof(xor_key));
+    if (tmp == NULL) {
         fprintf(stderr, "[Error] Could not encrypt your data\n");
-        close(fd);
         free(buff);
+        close(fd);
         return -1;
     }
-    if (write(fd, encrypted_data, buff_len) == -1) {
+    if (write(fd, tmp, buff_len) == -1) {
         fprintf(stderr, "[Error] Could not write data to memfd file\n");
-        close(fd);
-        free(encrypted_data);
+        free(tmp);
         free(buff);
+        close(fd);
         return -1;
     }
+    free(tmp);
     lseek(fd, 0, SEEK_SET);
     printf("[Success] Encrypted your data with xor and written it to memfd\n");    
 
     printf("Encrypted data in memfd(hex): ");
     while (read(fd, buff, buff_len) > 0) {
         for (ssize_t i = 0; i < buff_len; i++) {
-            printf("%02X ", buff[i]);
+            printf("%02X ", (unsigned char)buff[i]);
         }
     }
     printf("\n");
     lseek(fd, 0, SEEK_SET);
+    read(fd, buff, buff_len);
 
-    printf("Decrypted data: ");
-    while (read(fd, buff, buff_len) > 0) {
-        for (ssize_t i = 0; i < buff_len; i++) {
-            printf("%c ", buff[i] ^ xor_key[i % key_len]);
-        }
-    }
-    printf("\n");
-    lseek(fd, 0, SEEK_SET);
+    printf("[Info] Reading memfd and decrypting data...\n");
+    tmp = encrypt_decrypt(buff, buff_len, xor_key, sizeof(xor_key));
+    printf("Decrypted data: %s", tmp);
 
-    close(fd);
-    free(encrypted_data);
+    sleep(30); // analyze /proc/PID/fd/3 - you will see xor encrypted data
+    free(tmp);
     free(buff);
+    close(fd);
 
     return 0;
 }
