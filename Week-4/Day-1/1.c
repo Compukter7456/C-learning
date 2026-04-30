@@ -43,8 +43,11 @@ struct Transaction *create_transaction(unsigned long int sum, char sender[ARR_SI
 
 // Add element to the beginning of the list
 void prepend(struct Transaction **head, unsigned long int sum, char *sender, char *recipient) {
-    struct Transaction *new = create_transaction(sum, sender, recipient);
+    if (head == NULL) {
+        return;
+    }
 
+    struct Transaction *new = create_transaction(sum, sender, recipient);
     if (new == NULL) {
         return;
     }
