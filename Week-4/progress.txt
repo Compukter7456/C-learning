@@ -1,0 +1,11 @@
+Day-18
+- Learned singly linked list structure
+- Wrote a code that creates sll structure
+- Wrote a function that adds new element to the beginning of the sll
+- Wrote a function that prints all nodes in ssl
+- Wrote a function that prints single node in ssl
+- Wrote a function that frees all ssl nodes
+- Wrote a function that calculates nodes in ssl
+- Wrote a function that searches in ssl node by id
+- Wrote a function that deletes single element in ssl by id
+// ssl - singly linked list
