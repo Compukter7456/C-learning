@@ -4,18 +4,8 @@
 
 #include "operations.h"
 
-size_t my_strlen(const char *str) {
-    size_t length = 0;
 
-    while (*str != '\0') {
-        length++;
-        str++;      
-    }
-
-    return length;
-}
-
-struct Transaction *create_transaction(unsigned long int id, unsigned long int sum, const char *sender, const char *recipient) {
+struct Transaction *create_transaction(const unsigned long int id, const unsigned long int sum, const char *sender, const size_t sender_length, const char *recipient, size_t recipient_length) {
     struct Transaction *new_transaction = (struct Transaction*)calloc(1, sizeof(struct Transaction));
     if (new_transaction == NULL) {
         fprintf(stderr, "[Error] Failed to create new transaction\n");
@@ -24,20 +14,20 @@ struct Transaction *create_transaction(unsigned long int id, unsigned long int s
 
     new_transaction->id = id;
     new_transaction->sum = sum;
-    snprintf(new_transaction->sender, ARR_SIZE, "%s", sender);
-    snprintf(new_transaction->recipient, ARR_SIZE, "%s", recipient);
+    snprintf(new_transaction->sender, ARR_SIZE, "%s", ARR_SIZE);
+    snprintf(new_transaction->recipient, ARR_SIZE, "%s", ARR_SIZE);
 
     return new_transaction;
 }
 
 // Add element to the beginning of the list
-void prepend(struct Transaction **head, unsigned long int id, unsigned long int sum, char *sender, char *recipient) {
+void prepend(struct Transaction **head, const unsigned long int id, const unsigned long int sum, const char *sender, size_t sender_length, const char *recipient, size_t recipient_length) {
     if (head == NULL) {
         return;
     }
 
     
-    struct Transaction *new = create_transaction(id, sum, sender, recipient);
+    struct Transaction *new = create_transaction(id, sum, sender, sender_length, recipient, recipient_length);
     if (new == NULL) {
         return;
     }
@@ -55,12 +45,12 @@ void print_list(struct Transaction *head) {
     struct Transaction *current = head;
 
     while(current != NULL) {
-        printf("Transaction's memory address: %p\n", current);
+        printf("Transaction's memory address: %p\n", (void*)current);
         printf("Transaction's id: %lu\n", current->id);
         printf("Transaction sum: %lu\n", current->sum);
         printf("Sender: %s\n", current->sender);
         printf("Recipient: %s\n", current->recipient);
-        printf("Next transaction's memory address: %p\n", current->next);
+        printf("Next transaction's memory address: %p\n", (void*)current->next);
         printf("\n");
         current = current->next;
     }
@@ -71,14 +61,16 @@ void free_list(struct Transaction *head) {
         return;
     }
 
-    for (struct Transaction *tmp = head; head != NULL;) {
+    struct Transaction *tmp = head;
+
+    while (head != NULL) {
         tmp = head;
         head = head->next;
         free(tmp);
     } 
 }
 
-size_t list_length(struct Transaction *head) {
+size_t list_length(const struct Transaction *head) {
     if (head == NULL) {
         return 0;
     }
@@ -93,7 +85,7 @@ size_t list_length(struct Transaction *head) {
     return elements;
 }
 
-struct Transaction *list_search(struct Transaction *head, unsigned long int id) {
+struct Transaction *list_search(const struct Transaction *head, const unsigned long int id) {
     if (head == NULL) {
         return NULL;
     }
@@ -111,7 +103,7 @@ struct Transaction *list_search(struct Transaction *head, unsigned long int id) 
     return NULL;
 }
 
-void list_element_delete (struct Transaction **head, unsigned long int id) {
+void list_element_delete (struct Transaction **head, const unsigned long int id) {
     if (head == NULL || *head == NULL) {
         return;
     }

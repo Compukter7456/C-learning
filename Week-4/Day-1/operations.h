@@ -1,8 +1,6 @@
 #ifndef OPERATIONS_H
 #define OPERATIONS_H
 
-#include <stdio.h>
-
 #define ARR_SIZE 64
 
 struct Transaction {
@@ -13,13 +11,12 @@ struct Transaction {
     struct Transaction *next;
 };
 
-size_t my_strlen(const char *str);
-struct Transaction *create_transaction(unsigned long int id, unsigned long int sum, const char *sender, const char *recipient);
-void prepend(struct Transaction **head, unsigned long int id, unsigned long int sum, char *sender, char *recipient);
+struct Transaction *create_transaction(const unsigned long int id, const unsigned long int sum, const char *sender, const size_t sender_length, const char *recipient, size_t recipient_length);
+void prepend(struct Transaction **head, const unsigned long int id, const unsigned long int sum, const char *sender, size_t sender_length, const char *recipient, size_t recipient_length);
 void print_list(struct Transaction *head);
 void free_list(struct Transaction *head);
-size_t list_length(struct Transaction *head);
-struct Transaction *list_search(struct Transaction *head, unsigned long int id);
-void list_element_delete (struct Transaction **head, unsigned long int id);
+size_t list_length(const struct Transaction *head);
+struct Transaction *list_search(const struct Transaction *head, const unsigned long int id);
+void list_element_delete (struct Transaction **head, const unsigned long int id);
 
 #endif
