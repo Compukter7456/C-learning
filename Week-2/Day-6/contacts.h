@@ -1,7 +1,6 @@
 #ifndef CONTACTS_H
 #define CONTACTS_H
 
-
 #include <stddef.h>
 
 #define MAX_NAME    64
